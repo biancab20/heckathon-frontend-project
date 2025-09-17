@@ -55,7 +55,7 @@ export default function Home() {
                     </svg>
                     12 Members
                 </p>
-                <ul className="space-y-4 w-full">
+                <div className="space-y-4 w-full">
                     {books.map((book) => (
                         <div>
                             {book.image && (
@@ -74,7 +74,7 @@ export default function Home() {
                             <p className="text-xs text-gray-500">{book.status}</p>
                         </div>
                     ))}
-                </ul>
+                </div>
 
             </div>
         </div>
