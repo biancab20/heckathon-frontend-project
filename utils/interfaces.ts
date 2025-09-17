@@ -1,6 +1,7 @@
 export interface IMemberData {
     id: number;
     username: string;
+    image?: string;
 }
 
 export interface IBookData {
