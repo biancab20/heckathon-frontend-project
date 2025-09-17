@@ -1,13 +1,11 @@
 import {IBookData} from "../utils/interfaces";
 import BookCard from "./BookCard";
 import Image from "next/image";
+import { prisma } from "../src/lib/prisma";
 
-const mockBook: IBookData = {
-    id:0,
-    title: 'The Alchemist',
-    author: 'Paulo Coelho',
-    image: 'https://m.media-amazon.com/images/I/81t+zASRmqL._SL1500_.jpg',
-}
+
+const books = await prisma.book.findMany();
+  const members = await prisma.member.findMany();
 
 export default function Home() {
     return (
@@ -57,14 +55,27 @@ export default function Home() {
                     </svg>
                     12 Members
                 </p>
-                <div className={`mt-32`}>
-                    <Image
-                    src={'https://m.media-amazon.com/images/I/81t+zASRmqL._SL1500_.jpg'}
-                    alt={'book image'}
-                    width={200}
-                    height={200}
-                    ></Image>
-                </div>
+                <ul className="space-y-4 w-full">
+          {books.map((book) => (
+                <div>
+              {book.image && (
+                <Image
+                  src={book.image}
+                  alt={book.name}
+                  width={150}
+                  height={100}
+                  className="rounded"
+                  unoptimized // remove if domain is whitelisted in next.config.js
+                />
+              )}
+              
+                <h2 className="font-semibold">{book.name}</h2>
+                <p className="text-sm text-gray-600">by {book.author}</p>
+                <p className="text-xs text-gray-500">{book.status}</p>
+              </div>
+          ))}
+        </ul>
+
             </div>
         </div>
     );

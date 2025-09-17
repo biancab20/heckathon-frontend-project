@@ -13,6 +13,7 @@ export default function BookCard({data}: { data: IBookData }) {
                         alt={data.title ?? 'Book cover'}
                         width={200}
                         height={200}>
+                        unoptimized 
                     </Image>
                 )}
             </>
